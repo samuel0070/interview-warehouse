@@ -6,18 +6,19 @@ CREATE TABLE categories (
     category_name VARCHAR(50) NOT NULL,
     category_type VARCHAR(10) NOT NULL,
     parent_id UUID REFERENCES categories(id),
-    status INTEGER NOT NULL,
+    status INTEGER NOT NULL DEFAULT 1,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Items table with UUID
+-- Items table
 CREATE TABLE items (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     name VARCHAR(255) NOT NULL,
     description TEXT,
     category_id UUID NOT NULL REFERENCES categories(id),
     category_name VARCHAR(50) NOT NULL,
+    brand_name VARCHAR(50) NOT NULL,
     base_price DECIMAL(10,2) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -52,3 +53,13 @@ CREATE TABLE inventory_logs (
     reason TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE INDEX idx_categories_parent_id ON categories(parent_id);
+CREATE INDEX idx_items_category_id ON items(category_id);
+CREATE INDEX idx_items_brand_name ON items(brand_name);
+CREATE INDEX idx_variants_item_id ON variants(item_id);
+CREATE INDEX idx_variants_sku ON variants(sku);
+CREATE INDEX idx_variants_size ON variants(size);
+CREATE INDEX idx_variants_color ON variants(color);
+CREATE INDEX idx_variants_material ON variants(material);
+CREATE INDEX idx_inventory_logs_variant_id ON inventory_logs(variant_id);
