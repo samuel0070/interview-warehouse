@@ -31,6 +31,7 @@ A Spring Boot 3.x RESTful backend for managing a shop's inventory, categories, a
 ## ⚙️ Setup Instructions
 
 ### 1️⃣ Clone the Repository
+git clone https://github.com/samuel0070/interview-warehouse.git
 
 ### Create DB first named test_code_shop_inventory
 CREATE DATABASE test_code_shop_inventory;
@@ -49,6 +50,7 @@ i'm using flyway, so that sql syntax like create table, or insert dummy data can
 i'm using swagger, so tester can test it knowing the fields(json) and also exmple of return value
 ## example API endpoint
 ## ------------------------------Category----------------------------------
+
 -----------------------------Create-------------------------------------
 -------POST
 categoryName = string
@@ -113,14 +115,19 @@ request body:
 http://localhost:8080/inventory/variants-update/stock/024b90b4-6e31-4be8-b78f-3c8a2e977161
 
 ------SELL -------
+
 -----POST------
 variants/{variantId}/sell
 http://localhost:8080/inventory/variants/773a12a7-b871-499d-946d-709d18854eca/sell?quantity=3
 
 ------LIST of stock threshold(with limit)----------
+
 -------GET---------
 http://localhost:8080/inventory/variants/low-stock?threshold=12
 
+
 ------LIST HISTORY INVENTORY-------
+
+-----GET------
 inventory/variants-history/{variantId}
 http://localhost:8080/inventory/variants-history/49a570c5-6401-4d08-ab74-b67cb9a8f6ad'
